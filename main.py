@@ -16,30 +16,19 @@ def select_language():
         present_time = datetime.datetime.now()
         text_gr, text_en = Select_Language()
 
-        if text_gr is None and text_en is None:
-            continue
-
-        if text_gr == 'Ελληνικά' or text_en == 'Greek':
-            print('Επιλέξατε Ελληνικά')
-            if present_time.hour < 12 :
-                print('Καλημέρα')
-            else:
-                print('Καλησπέρα')
-            time.sleep(1)
+        if text_gr in LANGUAGE_COMMANDS["el"] or text_en in LANGUAGE_COMMANDS["el"]:
             language = 'el'
-            break
-
-        elif text_gr == 'Αγγλικά' or text_en == 'English':
-            print('You chose English')
-            if present_time.hour < 12 :
-                print('Good morning')
-            else:
-                print('Good evening')
-            time.sleep(1)
+        elif text_en in LANGUAGE_COMMANDS["en"] or text_gr in LANGUAGE_COMMANDS["en"]:
             language = 'en'
-            break
         else:
-            print('Ελληνικά or English')
+            continue
+        print(MESSAGES[language]['language_selected'])
+        if present_time.hour < 12 :
+            print(MESSAGES[language]['morning'])
+        else:
+            print(MESSAGES[language]['evening'])
+        time.sleep(1)
+        break
 
     return language
 

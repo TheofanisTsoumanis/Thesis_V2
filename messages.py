@@ -1,4 +1,7 @@
-
+LANGUAGE_COMMANDS = {
+    'el': ['Ελληνικά', 'Ελληνική', 'Greek', 'Greece'],
+    'en': ['Αγγλικά', 'Αγγλική', 'English']
+}
 MESSAGES = {
     'el' : {
         'name' : 'Παρακαλώ πείτε το όνομα σας: ',
@@ -17,7 +20,10 @@ MESSAGES = {
         'postal_code' : 'Παρακαλώ πείτε μου τον ταχυδρομικό σας κώδικα: ',
         'city' : 'Παρακαλώ πείτε μου το όνομα της πόλης: ',
         'phone' : 'Παρακαλώ πείτε μου τον αριθμό του σταθερού τηλεφώνου σας: ',
-        'email' : 'Παρακαλώ πληκτρολογήστε την ηλεκτρονική σας διεύθυνση: '
+        'email' : 'Παρακαλώ πληκτρολογήστε την ηλεκτρονική σας διεύθυνση: ',
+        'language_selected': 'Επιλέξατε Ελληνικά',
+        'morning': 'Καλημέρα',
+        'evening': 'Καλησπέρα'
     },
 
     'en' : {
@@ -37,6 +43,9 @@ MESSAGES = {
         'postal_code' : 'Please tell me your postal code: ',
         'city' : 'Please tell me the name of the city: ',
         'phone' : 'Please tell me your phone number: ',
-        'email' : 'Please type your e-mail address: '
+        'email' : 'Please type your e-mail address: ',
+        'language_selected': 'You chose English',
+        'morning': 'Good morning',
+        'evening': 'Good evening'
     }
 }
