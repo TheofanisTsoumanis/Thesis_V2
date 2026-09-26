@@ -3,9 +3,13 @@ from input_voice_functions import *
 from messages import *
 from config import *
 from docxtpl import DocxTemplate
+import subprocess
 import datetime 
 import time
+import os
 
+
+libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
 
 def select_language():
     while True:
@@ -112,7 +116,17 @@ elif choice == 'Application':
     doc = DocxTemplate("templates/APPLICATION_doc.docx")
 
 doc.render(data)
-doc.save(f"saved_files/{filename}")
+os.makedirs("saved_files", exist_ok=True)
+docx_path = f"saved_files/{filename}"
+doc.save(docx_path)
+subprocess.run([
+    libreoffice_path,
+    "--headless",
+    "--convert-to", "pdf",
+    "--outdir", "saved_files",
+    docx_path
+])
+
 
 print(f'Το αρχείο αποθηκεύτηκε στη συσκευή σας επιτυχώς με όνομα {filename}.')
 time.sleep(1.5)
