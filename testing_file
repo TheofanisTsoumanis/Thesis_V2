@@ -59,7 +59,26 @@ try:
     os.startfile(pdf_path)
 
 except Exception as e:
-    print(f"{type(e).__name__}: {e}")
+    print(f"Microsoft Word: {type(e).__name__}: {e}")
 
-print("didn't crush")
+    try:
+        libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
+        print(os.path.exists(libreoffice_path))
+
+        subprocess.run([
+        libreoffice_path,
+        "--headless",
+        "--convert-to", "pdf",
+        "--outdir", "saved_files",
+        docx_path
+        ], check=True)
+        pdf_path = os.path.abspath(f"saved_files/{filename}")
+        os.startfile(pdf_path)
+
+    except Exception as e:
+        print(f"LibreOffice: {type(e).__name__}: {e}")
+
+        print("You don't have the right tool to convert to PDF!\nI recomment LibreOffice!")
+
+print("The file handling process is completed.")
  

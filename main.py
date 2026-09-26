@@ -7,8 +7,7 @@ import subprocess
 import datetime 
 import time
 import os
-
-
+import win32com.client
 
 
 def select_language():
@@ -118,17 +117,43 @@ os.makedirs("saved_files", exist_ok=True)
 docx_path = f"saved_files/{filename}"
 doc.save(docx_path)
 
-# Μετατροπή Word σε PDF
-libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
-subprocess.run([
-    libreoffice_path,
-    "--headless",
-    "--convert-to", "pdf",
-    "--outdir", "saved_files",
-    docx_path
-])
-
-
 print(f'Το αρχείο αποθηκεύτηκε στη συσκευή σας επιτυχώς με όνομα {filename}.')
 time.sleep(1.5)
 
+# Ανίχνευση για microsoft word ή libreoffice καθώς και έλεγχος ορθής λειτουργίας τους.
+filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.pdf"
+try:
+    word = win32com.client.Dispatch("Word.Application")
+
+    document = word.Documents.Open(os.path.abspath(docx_path))
+    pdf_path = os.path.abspath(f"saved_files/{filename}")
+
+    document.SaveAs(pdf_path, FileFormat=17)
+    document.Close()
+    word.Quit()
+
+    os.startfile(pdf_path)
+
+except Exception as e:
+    print(f"Microsoft Word: {type(e).__name__}: {e}")
+
+    try:
+        libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
+        print(os.path.exists(libreoffice_path))
+
+        subprocess.run([
+        libreoffice_path,
+        "--headless",
+        "--convert-to", "pdf",
+        "--outdir", "saved_files",
+        docx_path
+        ], check=True)
+        pdf_path = os.path.abspath(f"saved_files/{filename}")
+        os.startfile(pdf_path)
+
+    except Exception as e:
+        print(f"LibreOffice: {type(e).__name__}: {e}")
+
+        print("You don't have the right tool to convert to PDF!\nI recomment LibreOffice!")
+
+print("The file handling process is completed.")
