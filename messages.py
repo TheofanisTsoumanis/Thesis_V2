@@ -21,9 +21,10 @@ MESSAGES = {
         'city' : 'Παρακαλώ πείτε μου το όνομα της πόλης: ',
         'phone' : 'Παρακαλώ πείτε μου τον αριθμό του σταθερού τηλεφώνου σας: ',
         'email' : 'Παρακαλώ πληκτρολογήστε την ηλεκτρονική σας διεύθυνση: ',
-        'language_selected': 'Επιλέξατε Ελληνικά',
-        'morning': 'Καλημέρα',
-        'evening': 'Καλησπέρα'
+        'email_type' : '-> ',
+        'language_selected' : 'Επιλέξατε Ελληνικά!',
+        'morning' : 'Καλημέρα!',
+        'evening' : 'Καλησπέρα!'
     },
 
     'en' : {
@@ -44,8 +45,9 @@ MESSAGES = {
         'city' : 'Please tell me the name of the city: ',
         'phone' : 'Please tell me your phone number: ',
         'email' : 'Please type your e-mail address: ',
-        'language_selected': 'You chose English',
-        'morning': 'Good morning',
-        'evening': 'Good evening'
+        'email_type' : '-> ',
+        'language_selected' : 'You chose English!',
+        'morning' : 'Good morning!',
+        'evening' : 'Good evening!'
     }
 }

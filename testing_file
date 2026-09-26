@@ -1,0 +1,65 @@
+from input_voice_functions import *
+from messages import *
+from config import *
+from docxtpl import DocxTemplate
+import subprocess
+import datetime 
+import time
+import os
+import win32com.client
+
+
+choice_list = ['name', 'last_name', 'thesis_topic']
+newinputlist = []
+for i in choice_list:
+    newinput = input(i)
+    newinputlist.append(newinput)
+
+
+# δημιουργία λεξικού για να το κάνω στην πορεία αντικατάσταση.
+data = dict(zip(choice_list, newinputlist))
+print()
+for key, value in data.items():
+    print(f'{key}: {value}')
+
+choice = 'Πτυχιακή'
+# Ονομασία, επιλογή αρχείου και αποθήκευση του.
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.docx"
+
+if choice == 'Πτυχιακή':  
+    doc = DocxTemplate("templates/ΠΤΥΧΙΑΚΗ_doc.docx")
+
+elif choice == 'Thesis':
+    doc = DocxTemplate("templates/THESIS_doc.docx")
+
+elif choice == 'Αίτηση':
+    doc = DocxTemplate("templates/ΑΙΤΗΣΗ_doc.docx")
+
+elif choice == 'Application':
+    doc = DocxTemplate("templates/APPLICATION_doc.docx")
+
+doc.render(data)
+os.makedirs("saved_files", exist_ok=True)
+docx_path = f"saved_files/{filename}"
+doc.save(docx_path)
+
+filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.pdf"
+try:
+    word = win32com.client.Dispatch("Word.Application")
+
+    document = word.Documents.Open(os.path.abspath(docx_path))
+    pdf_path = os.path.abspath(f"saved_files/{filename}")
+
+    document.SaveAs(pdf_path, FileFormat=17)
+    document.Close()
+    word.Quit()
+
+    os.startfile(pdf_path)
+
+except Exception as e:
+    print(f"{type(e).__name__}: {e}")
+
+print("didn't crush")
+ 

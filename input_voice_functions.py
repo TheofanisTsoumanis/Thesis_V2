@@ -11,7 +11,7 @@ def Select_Language():
         with sr.Microphone() as mic:
 
             rec.adjust_for_ambient_noise(mic, duration = 1)
-            print("Speak:")
+            print("*")
             audio = rec.listen(mic, timeout = 4, phrase_time_limit = 10)
             
             text_gr = str(rec.recognize_google(audio, language = "el-GR"))
@@ -21,7 +21,7 @@ def Select_Language():
             return  text_gr, text_en
             
     except Exception as e:
-        print(f"{type(e).__name__}: {e}")
+        print(f"{type(e).__name__}: {e}\n")
         return None, None
 
 def Speech(lang):
@@ -43,7 +43,7 @@ def Speech(lang):
             return text
         
     except Exception as e:
-        print(f"{type(e).__name__}: {e}")
+        print(f"{type(e).__name__}: {e}\n")
         return None
 
 

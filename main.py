@@ -9,7 +9,7 @@ import time
 import os
 
 
-libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
+
 
 def select_language():
     while True:
@@ -21,6 +21,7 @@ def select_language():
         elif text_en in LANGUAGE_COMMANDS["en"] or text_gr in LANGUAGE_COMMANDS["en"]:
             language = 'en'
         else:
+            print(f'Πείτε: Ελληνικά\nSay: English')
             continue
         print(MESSAGES[language]['language_selected'])
         if present_time.hour < 12 :
@@ -50,6 +51,10 @@ def GetValidChoice(language, lang, valid_choice):
 
         print(MESSAGES[language]["valid_choice"])
     
+# Να κλείνει το πρόγραμμα
+
+# Να μην επιτρέπει λεξιλόγιο
+
 
 # επιλογή γλώσσας
 print('Ελληνικά - English')
@@ -58,10 +63,11 @@ lang = SPEECH_LANGUAGES[language]
 
 # επιλογή template
 print(MESSAGES[language]['choose_template'])
-time.sleep(1)
+time.sleep(0.5)
 valid_templates = ['Πτυχιακή', 'Thesis', 'Αίτηση', 'Application']
 choice = GetValidChoice(language, lang, valid_templates)
 
+# Δημιουργία λιστών
 if choice == 'Πτυχιακή' or choice == 'Thesis':
     choice_list = ['name', 'last_name', 'fathers_name', 'registration_number', 'address', 'postal_code', 'city', 'phone', 'email', 'professors_name', 'thesis_topic']
 elif choice == 'Αίτηση' or choice == 'Application':
@@ -72,11 +78,14 @@ newinputlist = []
 # προσπέλαση της λίστας με ονόματα των templates
 for item in choice_list:
     print(MESSAGES[language][item])
-
+    if item == 'email':
+        newinput = input(MESSAGES[language]['email_type'])
+        # επιλογή κατάλληξης email
+        newinput = str(newinput) + '@gmail.com'
+        newinputlist.append(newinput)
+        continue
     newinput = Speech(lang)
     newinput = ValueCheck(newinput, lang)
-    if item == 'email':
-        newinput = str(newinput) + '@gmail.com'
     newinputlist.append(newinput)
 
 
@@ -87,7 +96,7 @@ for key, value in data.items():
     print(f'{key}: {value}')
 
 
-
+# Ονομασία, επιλογή αρχείου και αποθήκευση του.
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.docx"
@@ -108,6 +117,9 @@ doc.render(data)
 os.makedirs("saved_files", exist_ok=True)
 docx_path = f"saved_files/{filename}"
 doc.save(docx_path)
+
+# Μετατροπή Word σε PDF
+libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
 subprocess.run([
     libreoffice_path,
     "--headless",
@@ -120,4 +132,3 @@ subprocess.run([
 print(f'Το αρχείο αποθηκεύτηκε στη συσκευή σας επιτυχώς με όνομα {filename}.')
 time.sleep(1.5)
 
-# αντικατάσταση και αποθήκευση.
