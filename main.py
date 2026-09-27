@@ -60,6 +60,8 @@ print('Ελληνικά - English')
 language = select_language()
 lang = SPEECH_LANGUAGES[language]
 
+# Δημηουργία menu για 1) Δημιουργία εγγράφου 2) Επιλογή Έτοιμου template 3) Έξοδος από την εφαρμογή.
+
 # επιλογή template
 print(MESSAGES[language]['choose_template'])
 time.sleep(0.5)
@@ -70,7 +72,7 @@ choice = GetValidChoice(language, lang, valid_templates)
 if choice == 'Πτυχιακή' or choice == 'Thesis':
     choice_list = ['name', 'last_name', 'fathers_name', 'registration_number', 'address', 'postal_code', 'city', 'phone', 'email', 'professors_name', 'thesis_topic']
 elif choice == 'Αίτηση' or choice == 'Application':
-    choice_list = ['name', 'last_name', 'require']
+    choice_list = ['name', 'last_name', 'fathers_name', 'mothers_name', 'registration_number', 'semester', 'street_name', 'street_number', 'postal_code', 'city', 'phone', 'mobile_phone']
 
 newinputlist = []
 
@@ -87,6 +89,67 @@ for item in choice_list:
     newinput = ValueCheck(newinput, lang)
     newinputlist.append(newinput)
 
+# Πρόσθετη επεξεργασία για το application
+yes_list = ['ναι', 'yes']
+
+# Τι χρειάζεται ο χρήστης
+what_need = [
+    'certificate_of_studies',
+    'detailed_score',
+    'other'
+]
+selected_what_need = []
+
+for item in what_need:
+    print(MESSAGES[language][item])
+    newinput = Speech(lang)
+    newinput = ValueCheck(newinput, lang)
+    
+    if newinput in yes_list:
+        if item == 'other':
+            print(DOCUMENT_VALUES[language][item])
+            newinput = Speech(lang)
+            first_messsage = f'{DOCUMENT_VALUES[language]['other_label']}'
+            second_message = ValueCheck(newinput, lang)
+            full_message_other = first_messsage + str(second_message)
+            selected_what_need.append(full_message_other)
+            continue
+        selected_what_need.append(DOCUMENT_VALUES[language][item])
+    else:
+        pass
+
+what_need_value = '\n'.join(selected_what_need)
+choice_list.append('what_need')
+newinputlist.append(what_need_value)
+
+# Για πιο λόγο το θέλει ο χρήστης
+what_for = [
+    'every_use',
+    'tax_office',
+    'recruitment'
+]
+selected_what_for = []
+
+for item in what_for:
+    print(MESSAGES[language][item])
+    newinput = Speech(lang)
+    newinput = ValueCheck(newinput, lang)
+
+    if newinput in yes_list:
+        selected_what_for.append(DOCUMENT_VALUES[language][item])
+
+what_for_value = '\n'.join(selected_what_for)
+choice_list.append('what_for')
+newinputlist.append(what_for_value)
+
+# Ημερομηνία
+present_date = datetime.datetime.now()
+choice_list.append('day')
+newinputlist.append(present_date.day)
+choice_list.append('month')
+newinputlist.append(present_date.month)
+choice_list.append('year')
+newinputlist.append(present_date.year)
 
 # δημιουργία λεξικού για να το κάνω στην πορεία αντικατάσταση.
 data = dict(zip(choice_list, newinputlist))
@@ -124,19 +187,15 @@ time.sleep(1.5)
 filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.pdf"
 try:
     word = win32com.client.Dispatch("Word.Application")
-
     document = word.Documents.Open(os.path.abspath(docx_path))
     pdf_path = os.path.abspath(f"saved_files/{filename}")
-
     document.SaveAs(pdf_path, FileFormat=17)
     document.Close()
     word.Quit()
-
     os.startfile(pdf_path)
 
 except Exception as e:
     print(f"Microsoft Word: {type(e).__name__}: {e}")
-
     try:
         libreoffice_path = r"C:\Program Files\LibreOffice\program\soffice.exe"
         print(os.path.exists(libreoffice_path))
@@ -153,7 +212,5 @@ except Exception as e:
 
     except Exception as e:
         print(f"LibreOffice: {type(e).__name__}: {e}")
-
         print("You don't have the right tool to convert to PDF!\nI recomment LibreOffice!")
-
-print("The file handling process is completed.")
+print("The process is completed.")
