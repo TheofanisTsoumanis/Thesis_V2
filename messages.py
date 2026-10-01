@@ -1,8 +1,24 @@
+
+
 LANGUAGE_COMMANDS = {
     'el': ['Ελληνικά', 'Ελληνική', 'Greek', 'Greece'],
     'en': ['Αγγλικά', 'Αγγλική', 'English']
 }
 
+PROGRAM_TERMITATION_COMMANDS = {
+    'el': ["Τερματισμός Προγράμματος", 'Τερματισμός', 'Τέλος Προγράμματος', 'Έξοδος'],
+    'εν': ['Program Termination', 'Terminate The Program', 'Terminate', 'End The Program', 'End Program', 'Close Program', 'Exit Program', 'Exit', 'Close']
+}
+
+PROGRAM_TERMINATION_SALUTE = {
+    'el': ['Καλή Συνέχεια!'],
+    'en': ['Goodbye!']
+}
+
+INAPROPRIATE_WORDS = {
+    'el': ['Βλάκας', 'Χαζός', 'Ηλίθιος', 'Κουτός'],
+    'en': ['Idiot', 'Stupid', 'MORON','DUMB','JERK']
+}
 DOCUMENT_VALUES = {
     'el': {
         'certificate_of_studies': 'Βεβαίωση σπουδών',
@@ -29,7 +45,7 @@ MESSAGES = {
     'el' : {
         'name' : 'Παρακαλώ πείτε το όνομα σας: ',
         'last_name' :  'Παρακαλώ πείτε μου το επώνυμο σας: ',
-        'fullname' : '{name} {lastname}',
+        'fullname' : 'Παρακαλώ πείτε μου το ονοματεπώνυμό σας: ',
         'professors_name' : 'Παρακαλώ πείτε μου το ονοματεπώνυμο του καθηγητή σας: ',
         'thesis_topic' : 'Παρακαλώ πείτε μου το θέμα της Πτυχιακής εργασίας σας: ',
         'require' : 'Τι χρειάζεστε: ',

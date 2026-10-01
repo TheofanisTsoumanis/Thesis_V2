@@ -11,7 +11,7 @@ def Select_Language():
         with sr.Microphone() as mic:
 
             rec.adjust_for_ambient_noise(mic, duration = 1)
-            print("*")
+            print("Ενεργό μικρόφωνο / Active mic:")
             audio = rec.listen(mic, timeout = 4, phrase_time_limit = 10)
             
             text_gr = str(rec.recognize_google(audio, language = "el-GR"))
@@ -32,7 +32,7 @@ def Speech(lang):
         with sr.Microphone() as mic:
 
             rec.adjust_for_ambient_noise(mic, duration = 0.5)
-
+            print('->')
             audio = rec.listen(mic, timeout = 5, phrase_time_limit = 13)
 
             text = str(rec.recognize_google(audio, language = lang))
