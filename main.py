@@ -36,7 +36,7 @@ def select_language():
 # Να κλείνει το πρόγραμμα
 def ProgramTermination(newinput, lang):
     if newinput in PROGRAM_TERMITATION_COMMANDS[lang]:
-        print(PROGRAM_TERMINATION_SALUTE[lang])
+        print(PROGRAM_TERMINATION_SALUTE[language])
         sys.exit(0)
 
 # Να μην επιτρέπει λεξιλόγιο
@@ -51,19 +51,20 @@ def NoneCheck(newinput):
 
 def InputValidation(lang):
     while True:
-        print('Calling the function for Speech')
+        #print('Calling the function for Speech')
         newinput = Speech(lang)
-        print('Check for program termination')
-        ProgramTermination(newinput, lang)
-        print('check for inapropriate words')
-        newinput_inapropriate = InapropriateWords(newinput, lang)
+        #print('Check for program termination')
+        ProgramTermination(newinput, language)
+        #print('check for inapropriate words')
+        newinput_inapropriate = InapropriateWords(newinput, language)
         if newinput_inapropriate:
             continue
-        print('Check for None words')
+        #print('Check for None words')
         newinput_none = NoneCheck(newinput)
         if newinput_none:
             continue
-        print('field type\ncomming soon!')
+        #print('field type\ncomming soon!')
+        return newinput
 
 
 # έλεγχος για valid choice    
@@ -104,7 +105,7 @@ for item in choice_list:
     if item == 'email':
         # επιλογή πλατφόρμας για τα email
         newinput = input(MESSAGES[language]['email_type'])
-        # επιλογή κατάλληξης email
+        # επιλογή κατάληξης email
         newinput = str(newinput) + '@gmail.com'
         newinputlist.append(newinput)
         continue
@@ -130,17 +131,15 @@ for item in what_need:
         if newinput in yes_list:
             if item == 'other':
                 print(DOCUMENT_VALUES[language][item])
-                newinput = Speech(lang)
                 first_messsage = f'{DOCUMENT_VALUES[language]['other_label']}'
-                second_message = NoneCheck(newinput, lang)
+                second_message = InputValidation(lang)
                 full_message_other = first_messsage + str(second_message)
                 selected_what_need.append(full_message_other)
-                continue
+                break
             selected_what_need.append(DOCUMENT_VALUES[language][item])
             break
         else:
-        
-            pass
+            break
 
 what_need_value = '\n'.join(selected_what_need)
 choice_list.append('what_need')
@@ -155,12 +154,16 @@ what_for = [
 selected_what_for = []
 
 for item in what_for:
-    print(MESSAGES[language][item])
-    newinput = Speech(lang)
-    newinput = NoneCheck(newinput, lang)
+    while True:
+        print(MESSAGES[language][item])
+        newinput = InputValidation(lang)
 
-    if newinput in yes_list:
-        selected_what_for.append(DOCUMENT_VALUES[language][item])
+        if newinput in yes_list:
+            selected_what_for.append(DOCUMENT_VALUES[language][item])
+            break
+        else:
+            print('You said no')
+            break
 
 what_for_value = '\n'.join(selected_what_for)
 choice_list.append('what_for')
