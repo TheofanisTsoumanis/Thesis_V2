@@ -36,9 +36,6 @@ def Speech(lang):
 
             text = str(rec.recognize_google(audio, language = lang))
 
-            text = text.capitalize()
-            print(text)
-
             return text
         
     except Exception as e:

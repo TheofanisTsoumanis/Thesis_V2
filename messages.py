@@ -1,13 +1,13 @@
 
 
 LANGUAGE_COMMANDS = {
-    'el': ['Ελληνικά', 'Ελληνική', 'Greek', 'Greece'],
-    'en': ['Αγγλικά', 'Αγγλική', 'English']
+    'el': ['ελληνικά', 'ελληνική', 'greek', 'greece'],
+    'en': ['αγγλικά', 'αγγλική', 'english']
 }
 
 PROGRAM_TERMITATION_COMMANDS = {
-    'el': ["Τερματισμός Προγράμματος", 'Τερματισμός', 'Τέλος Προγράμματος', 'Έξοδος'],
-    'εν': ['Program Termination', 'Terminate The Program', 'Terminate', 'End The Program', 'End Program', 'Close Program', 'Exit Program', 'Exit', 'Close']
+    'el': ["τερματισμός προγράμματος", 'τερματισμός', 'τέλος προγράμματος', 'έξοδος'],
+    'εν': ['program termination', 'terminate the program', 'terminate', 'end the program', 'end program', 'close program', 'exit program', 'exit', 'close']
 }
 
 PROGRAM_TERMINATION_SALUTE = {
@@ -16,8 +16,8 @@ PROGRAM_TERMINATION_SALUTE = {
 }
 
 INAPROPRIATE_WORDS = {
-    'el': ['Βλάκας', 'Χαζός', 'Ηλίθιος', 'Κουτός'],
-    'en': ['Idiot', 'Stupid', 'MORON','DUMB','JERK']
+    'el': ['βλάκας', 'χαζός', 'ηλίθιος', 'κουτός'],
+    'en': ['idiot', 'stupid', 'moron','dumb','jerk']
 }
 DOCUMENT_VALUES = {
     'el': {
@@ -79,7 +79,7 @@ MESSAGES = {
     'en' : {
         'name' : 'Please tell me your name: ',
         'last_name' : 'Please tell me your surname: ',
-        'fullname' : '{name} {lastname}',
+        'fullname' : 'Please tell me your full name: ',
         'professors_name' : 'Please tell me your professors full name: ',
         'thesis_topic' : 'Please tell me your thesis topic: ',
         'require' : 'What do you need: ',

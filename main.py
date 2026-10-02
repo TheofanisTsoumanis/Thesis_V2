@@ -48,7 +48,7 @@ def InapropriateWords(newinput, lang):
 def NoneCheck(newinput):
         return newinput is None
 
-
+# για την περίπτωση που δεν απαντήσω χάνεται το μήνυμα του χρήστη.
 def InputValidation(lang):
     while True:
         #print('Calling the function for Speech')
@@ -88,13 +88,13 @@ lang = SPEECH_LANGUAGES[language]
 # επιλογή template
 print(MESSAGES[language]['choose_template'])
 time.sleep(0.5)
-valid_templates = ['Πτυχιακή', 'Thesis', 'Αίτηση', 'Application']
+valid_templates = ['πτυχιακή εργασία', 'thesis', 'αίτηση', 'application']
 choice = GetValidChoice(language, lang, valid_templates)
 
 # Δημιουργία λιστών
-if choice == 'Πτυχιακή' or choice == 'Thesis':
+if choice == 'πτυχιακή εργασία' or choice == 'thesis':
     choice_list = ['name', 'last_name', 'fathers_name', 'university_registration_number', 'address', 'postal_code', 'city', 'phone', 'email', 'professors_name', 'thesis_topic']
-elif choice == 'Αίτηση' or choice == 'Application':
+elif choice == 'αίτηση' or choice == 'application':
     choice_list = ['name', 'last_name', 'fathers_name', 'mothers_name', 'university_registration_number', 'semester', 'street_name', 'street_number', 'postal_code', 'city', 'phone', 'mobile_phone']
 
 newinputlist = []
@@ -113,8 +113,9 @@ for item in choice_list:
     newinputlist.append(newinput)
 
 # Πρόσθετη επεξεργασία για το application
-yes_list = ['Ναι', 'Yes']
+yes_list = ['ναι', 'yes']
 
+# Τουλάχιστον 1
 # Τι χρειάζεται ο χρήστης
 what_need = [
     'certificate_of_studies',
@@ -183,23 +184,23 @@ data = dict(zip(choice_list, newinputlist))
 print()
 for key, value in data.items():
     print(f'{key}: {value}')
-
+time.sleep(1.5)
 
 # Ονομασία, επιλογή αρχείου και αποθήκευση του.
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.docx"
 
-if choice == 'Πτυχιακή':  
+if choice == 'πτυχιακή εργασία':  
     doc = DocxTemplate("templates/ΠΤΥΧΙΑΚΗ_doc.docx")
 
-elif choice == 'Thesis':
+elif choice == 'thesis':
     doc = DocxTemplate("templates/THESIS_doc.docx")
 
-elif choice == 'Αίτηση':
+elif choice == 'αίτηση':
     doc = DocxTemplate("templates/ΑΙΤΗΣΗ_doc.docx")
 
-elif choice == 'Application':
+elif choice == 'application':
     doc = DocxTemplate("templates/APPLICATION_doc.docx")
 
 doc.render(data)
@@ -208,7 +209,7 @@ docx_path = f"saved_files/{filename}"
 doc.save(docx_path)
 
 print(f'Το αρχείο αποθηκεύτηκε στη συσκευή σας επιτυχώς με όνομα {filename}.')
-time.sleep(1.5)
+
 
 # Ανίχνευση για microsoft word ή libreoffice καθώς και έλεγχος ορθής λειτουργίας τους.
 filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.pdf"
