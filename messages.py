@@ -5,9 +5,9 @@ LANGUAGE_COMMANDS = {
     'en': ['αγγλικά', 'αγγλική', 'english']
 }
 
-PROGRAM_TERMITATION_COMMANDS = {
+PROGRAM_TERMINATION_COMMANDS = {
     'el': ["τερματισμός προγράμματος", 'τερματισμός', 'τέλος προγράμματος', 'έξοδος'],
-    'εν': ['program termination', 'terminate the program', 'terminate', 'end the program', 'end program', 'close program', 'exit program', 'exit', 'close']
+    'en': ['program termination', 'terminate the program', 'terminate', 'end the program', 'end program', 'close program', 'exit program', 'exit', 'close']
 }
 
 PROGRAM_TERMINATION_SALUTE = {
@@ -40,6 +40,21 @@ DOCUMENT_VALUES = {
 
     }
 }
+
+MENU_ANSWERS = {
+    'el' : {
+        'template_creation_answer' : 'δημιουργία',
+        'template_choice_answer' : 'επιλογή',
+        'template_exit_answer' : 'έξοδος',
+        'template_info_answer' : 'πληροφορίες'
+    },
+    'en' : {
+        'template_creation_answer': 'create',
+        'template_choice_answer': 'select',
+        'template_exit_answer': 'exit',
+        'template_info_answer' : 'info'
+    }
+}   
 
 MESSAGES = {
     'el' : {
@@ -74,7 +89,13 @@ MESSAGES = {
         'every_use' : 'Επιθυμείτε να είναι για κάθε χρήση;',
         'tax_office' : 'Επιθυμείτε να είναι για χρήση στην εφορία;',
         'recruitment' : 'Επιθυμείτε να είναι για στρατιωτική χρήση;',
-        'doc_convert' : 'Μετατροπή του αρχείο σε pdf.'
+        'doc_convert' : 'Μετατροπή του αρχείο σε pdf.',
+        'application_loop_select_at_least_one' : 'Παρακαλώ επιλέξτε τουλάχιστον μία επιλογή.',
+        'template_invalid_choice' : 'Επιλέξτε μια έγκυρη επιλογή!',
+        'template_creation': '1) Δημιουργία εγγράφου      → 1 / δημιουργία',
+        'template_choice':   '2) Επιλογή έτοιμου template → 2 / επιλογή',
+        'template_exit':     '3) Έξοδος από την εφαρμογή  → 3 / έξοδος',
+        'template_info':     '4) Πληροφορίες              → 4 / πληροφορίες'
     },
 
     'en' : {
@@ -109,6 +130,12 @@ MESSAGES = {
         'every_use' : 'Would you like it to be for general use?',
         'tax_office' : 'Would you like it to be for use at the tax office?',
         'recruitment' : 'Would you like it to be for military use?',
-        'doc_convert' : 'Convert file to pdf.'
+        'doc_convert' : 'Convert file to pdf.',
+        'application_loop_select_at_least_one' : 'Please select at least one option.',
+        'menu_invalid_choice': 'Please select a valid option!',
+        'template_creation': '1) Create document         → 1 / create',
+        'template_choice':   '2) Select a ready template → 2 / select',
+        'template_exit':     '3) Exit application        → 3 / exit',
+        'template_info':     '4) Information             → 4 / info'
     }
 }
