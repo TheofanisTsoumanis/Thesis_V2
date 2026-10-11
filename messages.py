@@ -11,8 +11,8 @@ PROGRAM_TERMITATION_COMMANDS = {
 }
 
 PROGRAM_TERMINATION_SALUTE = {
-    'el': ['Καλή Συνέχεια!'],
-    'en': ['Goodbye!']
+    'el': 'Καλή Συνέχεια!',
+    'en': 'Goodbye!'
 }
 
 INAPROPRIATE_WORDS = {
@@ -49,7 +49,7 @@ MESSAGES = {
         'professors_name' : 'Παρακαλώ πείτε μου το ονοματεπώνυμο του καθηγητή σας: ',
         'thesis_topic' : 'Παρακαλώ πείτε μου το θέμα της Πτυχιακής εργασίας σας: ',
         'require' : 'Τι χρειάζεστε: ',
-        'choose_template' : 'Παρακαλώ επιλέξτε Πτυχιακή ή Αίτηση: ',
+        'choose_template' : 'Παρακαλώ επιλέξτε Πτυχιακή Εργασία ή Αίτηση: ',
         'valid_choice' : 'Μη έγκυρη επιλογή. Παρακαλώ δοκιμάστε ξανά: ',
         'fathers_name' : 'Παρακαλώ πείτε μου το όνομα του πατέρα σας: ',
         'mothers_name' : 'Παρακαλώ πείτε μου το όνομα της μητέρας σας: ',
@@ -73,7 +73,8 @@ MESSAGES = {
         'other' : 'Επιθυμείτε να λάβετε κάποιο άλλο έγγραφο;',
         'every_use' : 'Επιθυμείτε να είναι για κάθε χρήση;',
         'tax_office' : 'Επιθυμείτε να είναι για χρήση στην εφορία;',
-        'recruitment' : 'Επιθυμείτε να είναι για στρατιωτική χρήση;'
+        'recruitment' : 'Επιθυμείτε να είναι για στρατιωτική χρήση;',
+        'doc_convert' : 'Μετατροπή του αρχείο σε pdf.'
     },
 
     'en' : {
@@ -107,6 +108,7 @@ MESSAGES = {
         'other' : 'Would you like to recieve a different document?',
         'every_use' : 'Would you like it to be for general use?',
         'tax_office' : 'Would you like it to be for use at the tax office?',
-        'recruitment' : 'Would you like it to be for military use?'
+        'recruitment' : 'Would you like it to be for military use?',
+        'doc_convert' : 'Convert file to pdf.'
     }
 }

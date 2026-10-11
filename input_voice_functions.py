@@ -16,8 +16,7 @@ def Select_Language():
             
             text_gr = str(rec.recognize_google(audio, language = "el-GR"))
             text_en = str(rec.recognize_google(audio, language = "en-US"))
-            text_gr = text_gr.capitalize()
-            text_en = text_en.capitalize()
+
             return  text_gr, text_en
             
     except Exception as e:

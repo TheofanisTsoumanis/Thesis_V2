@@ -49,19 +49,20 @@ def NoneCheck(newinput):
         return newinput is None
 
 # για την περίπτωση που δεν απαντήσω χάνεται το μήνυμα του χρήστη.
-def InputValidation(lang):
+def InputValidation(lang, question_text):
     while True:
         #print('Calling the function for Speech')
         newinput = Speech(lang)
+        #print('Check for None words')
+        newinput_none = NoneCheck(newinput)
+        if newinput_none:
+            print(question_text)
+            continue
         #print('Check for program termination')
         ProgramTermination(newinput, language)
         #print('check for inapropriate words')
         newinput_inapropriate = InapropriateWords(newinput, language)
         if newinput_inapropriate:
-            continue
-        #print('Check for None words')
-        newinput_none = NoneCheck(newinput)
-        if newinput_none:
             continue
         #print('field type\ncomming soon!')
         return newinput
@@ -102,6 +103,7 @@ newinputlist = []
 # προσπέλαση της λίστας με ονόματα των templates
 for item in choice_list:
     print(MESSAGES[language][item])
+    question_text = MESSAGES[language][item]
     if item == 'email':
         # επιλογή πλατφόρμας για τα email
         newinput = input(MESSAGES[language]['email_type'])
@@ -109,66 +111,69 @@ for item in choice_list:
         newinput = str(newinput) + '@gmail.com'
         newinputlist.append(newinput)
         continue
-    newinput = InputValidation(lang)
+    newinput = InputValidation(lang, question_text)
+    print(newinput)
     newinputlist.append(newinput)
 
 # Πρόσθετη επεξεργασία για το application
 yes_list = ['ναι', 'yes']
 
-# Τουλάχιστον 1
-# Τι χρειάζεται ο χρήστης
-what_need = [
-    'certificate_of_studies',
-    'detailed_score',
-    'other'
-]
-selected_what_need = []
 
-for item in what_need:
-    while True:
-        print(MESSAGES[language][item])
-        newinput = InputValidation(lang)
-        
-        if newinput in yes_list:
-            if item == 'other':
-                print(DOCUMENT_VALUES[language][item])
-                first_messsage = f'{DOCUMENT_VALUES[language]['other_label']}'
-                second_message = InputValidation(lang)
-                full_message_other = first_messsage + str(second_message)
-                selected_what_need.append(full_message_other)
+
+if choice == 'αίτηση' or choice == 'application':
+    # Τουλάχιστον 1
+    # Τι χρειάζεται ο χρήστης
+    what_need = [
+        'certificate_of_studies',
+        'detailed_score',
+        'other'
+    ]
+    selected_what_need = []
+
+    for item in what_need:
+        while True:
+            print(MESSAGES[language][item])
+            question_text = MESSAGES[language][item]
+            newinput = InputValidation(lang, question_text)
+            
+            if newinput in yes_list:
+                if item == 'other':
+                    print(DOCUMENT_VALUES[language][item])
+                    first_messsage = f'{DOCUMENT_VALUES[language]['other_label']}'
+                    second_message = InputValidation(lang, question_text)
+                    full_message_other = first_messsage + str(second_message)
+                    selected_what_need.append(full_message_other)
+                    break
+                selected_what_need.append(DOCUMENT_VALUES[language][item])
                 break
-            selected_what_need.append(DOCUMENT_VALUES[language][item])
-            break
-        else:
-            break
+            else:
+                break
 
-what_need_value = '\n'.join(selected_what_need)
-choice_list.append('what_need')
-newinputlist.append(what_need_value)
+    what_need_value = '\n'.join(selected_what_need)
+    choice_list.append('what_need')
+    newinputlist.append(what_need_value)
 
-# Για πιο λόγο το θέλει ο χρήστης
-what_for = [
-    'every_use',
-    'tax_office',
-    'recruitment'
-]
-selected_what_for = []
+    # Για πιο λόγο το θέλει ο χρήστης
+    what_for = [
+        'every_use',
+        'tax_office',
+        'recruitment'
+    ]
+    selected_what_for = []
 
-for item in what_for:
-    while True:
-        print(MESSAGES[language][item])
-        newinput = InputValidation(lang)
+    for item in what_for:
+        while True:
+            print(MESSAGES[language][item])
+            question_text = MESSAGES[language][item]
+            newinput = InputValidation(lang, question_text)
 
-        if newinput in yes_list:
-            selected_what_for.append(DOCUMENT_VALUES[language][item])
-            break
-        else:
-            print('You said no')
-            break
+            if newinput in yes_list:
+                selected_what_for.append(DOCUMENT_VALUES[language][item])
+                break
 
-what_for_value = '\n'.join(selected_what_for)
-choice_list.append('what_for')
-newinputlist.append(what_for_value)
+    what_for_value = '\n'.join(selected_what_for)
+    choice_list.append('what_for')
+    newinputlist.append(what_for_value)
 
 # Ημερομηνία
 present_date = datetime.datetime.now()
@@ -210,7 +215,7 @@ doc.save(docx_path)
 
 print(f'Το αρχείο αποθηκεύτηκε στη συσκευή σας επιτυχώς με όνομα {filename}.')
 
-
+print(MESSAGES[language]['doc_convert'])
 # Ανίχνευση για microsoft word ή libreoffice καθώς και έλεγχος ορθής λειτουργίας τους.
 filename = f"{choice}_{data['name']}_{data['last_name']}_{timestamp}.pdf"
 try:
